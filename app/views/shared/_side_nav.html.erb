@@ -3,15 +3,20 @@
   <!-- User info -->
   <div class="login-info">
     <span> <!-- User image size is adjusted inside CSS, it should stay as is -->
-
-      <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
-        <img src="assets/avatars/sunny.png" alt="me" class="online" />
-        <span>
-          john.doe
-        </span>
-        <i class="fa fa-angle-down"></i>
-      </a>
-
+      <% if current_user %>
+        <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+          <span>
+            <%= current_user.email %>
+          </span>
+          <i class="fa fa-angle-down"></i>
+        </a>
+      <% else %>
+        <a href="<%= new_user_session_path %>">
+          <span>
+            Please Sign In
+          </span>
+        </a>
+      <% end%>
     </span>
   </div>
   <!-- end user info -->
