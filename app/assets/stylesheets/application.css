@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+body {
+  background: url(mybg.png) #fff;
+}
+
+#left-panel {
+  padding-top: 0px;
+}
