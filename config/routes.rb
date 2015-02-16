@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :users, controllers: {registrations: "users"}
   resources :users
-  devise_for :users
   root 'users#dashboard'
   get "/dashboard" => "users#dashboard"
   put "/users/:id" => "users#update"

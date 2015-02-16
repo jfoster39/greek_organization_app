@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+    <div class="well no-padding">
+
+      <%= form_for(@user_form, url: users_path, html: {class: "smart-form client-form"}) do |f| %>
+        <header>Sign up</header>
+
+        <% if !@user_form.user.errors.empty? %>
+          <p class="alert alert-danger">
+            <% @user_form.user.errors.full_messages.each do |message| %>
+              <%= message %><br />
+            <% end %>
+          </p>
+        <% end %>
+
+        <fieldset>
+
+          <section>
+            <label class="label"><%= f.label :first_name %></label>
+            <label class="input"><%= f.text_field :first_name, autofocus: true %></label>
+          </section>
+
+          <section>
+            <label class="label"><%= f.label :last_name %></label>
+            <label class="input"><%= f.text_field :last_name %></label>
+          </section>
+
+          <section>
+            <label class="label"><%= f.label :phone_number %></label>
+            <label class="input"><%= f.text_field :phone_number %></label>
+          </section>
+
+          <section>
+            <label class="label"><%= f.label :email %></label>
+            <label class="input"><%= f.email_field :email %></label>
+          </section>
+
+          <section>
+            <label class="label"><%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %></label>
+            <label class="input"><%= f.password_field :password, autocomplete: "off" %></label>
+          </section>
+
+          <section>
+            <label class="label"><%= f.label :password_confirmation %></label>
+            <label class="input"><%= f.password_field :password_confirmation, autocomplete: "off" %></label>
+          </section>
+
+          <section>
+            <label class="label"><%= f.label :organization_id %></label>
+            <label class="select"><%= f.select :organization_id, @organizations.collect {|o| [o.name, o.id]}, {include_blank: "Select an organization"}, html: {class: "input"} %><i></i></label>
+          </section>
+
+        </fieldset>
+
+        <footer>
+          <div><%= f.submit "Sign up", class: "btn btn-primary" %></div>
+        </footer>
+      <% end %>
+
+    </div>
+    <p>Already have an account? <%= link_to "Sign in", new_user_session_path %>
+  </div>
+</div>
