@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:new, :create]
 
   def dashboard
-
   end
 
   def index

@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   root 'users#dashboard'
   get "/dashboard" => "users#dashboard"
   put "/users/:id" => "users#update"
+
+  get "/organizations/new" => "organizations#new", as: "new_organization"
+  post "/organizations" => "organizations#create"
 end
