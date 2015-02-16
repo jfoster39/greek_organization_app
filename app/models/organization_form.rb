@@ -20,7 +20,7 @@ class OrganizationForm
       password: @password,
       password_confirmation: @password_confirmation,
       organization: @organization,
-      role: "pending"
+      role: "admin"
     )
     ActiveRecord::Base.transaction do
       if !@user.save
