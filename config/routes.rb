@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'annoucements/feed'
+  	resources :annoucements
   devise_for :users, controllers: {registrations: "users"}
   resources :users
   root 'users#dashboard'
