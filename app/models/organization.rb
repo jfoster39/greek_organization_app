@@ -7,7 +7,11 @@ class Organization < ActiveRecord::Base
   validates :name, presence: true
 
   def has_financial_provider?
-    return !financial_provider.nil?
+    !financial_provider.nil?
+  end
+
+  def has_pending_members?
+    !users.where(role: "pending").blank?
   end
 
 end
