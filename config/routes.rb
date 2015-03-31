@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   devise_for :users, controllers: {registrations: "users"}
+  devise_scope :user do
+      get "/logout" => "devise/sessions#destroy"
+  end
   root 'users#dashboard'
   get "/dashboard" => "users#dashboard"
   get "/users" => "organizations#users"

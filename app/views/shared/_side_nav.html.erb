@@ -1,15 +1,17 @@
 <aside id="left-panel">
 
-  <!-- User info -->
   <div class="login-info">
-    <span> <!-- User image size is adjusted inside CSS, it should stay as is -->
+    <span>
       <% if current_user %>
-        <a href="javascript:void(0);" id="show-shortcut" data-action="toggleShortcut">
+        <a href="#" data-toggle="dropdown">
           <span>
             <%= current_user.email %>
           </span>
           <i class="fa fa-angle-down"></i>
         </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <li><a href="logout">Logout</a></li>
+        </ul>
       <% else %>
         <a href="<%= new_user_session_path %>">
           <span>
@@ -19,7 +21,6 @@
       <% end%>
     </span>
   </div>
-  <!-- end user info -->
 
   <nav>
 
@@ -29,23 +30,27 @@
     </li>
 
     <li>
-    <a href="ajax/calendar.html"><i class="fa fa-lg fa-fw fa-calendar"><em>3</em></i> <span class="menu-item-parent">Calendar</span></a>
+    <a href="/announcements"><i class="fa fa-lg fa-fw fa-bullhorn"></i> <span class="menu-item-parent">Announcements</span></a>
     </li>
 
     <li>
-    <a href="ajax/finances.html"><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Finances</span></a>
+    <a href="/calendar"><i class="fa fa-lg fa-fw fa-calendar"></i> <span class="menu-item-parent">Calendar</span></a>
+    </li>
+
+    <% if current_user && current_user.organization.has_financial_provider? %>
+      <li>
+      <a href=<%= current_user.organization.financial_provider.external_url %>><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Finances</span></a>
+      </li>
+    <% else %>
+
+    <% end %>
+
+    <li>
+    <a href="/users"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Users</span></a>
     </li>
 
     <li>
-    <a href="/users.html"><i class="fa fa-lg fa-fw fa-group"></i> <span class="menu-item-parent">Users</span></a>
-    </li>
-
-    <li>
-    <a href="ajax/documents.html"><i class="fa fa-lg fa-fw fa-file-text-o"></i> <span class="menu-item-parent">Documents</span></a>
-    </li>
-
-    <li>
-    <a href="ajax/announcements.html"><i class="fa fa-lg fa-fw fa-comments"><em>2</em></i> <span class="menu-item-parent">Events</span></a>
+    <a href="/documents"><i class="fa fa-lg fa-fw fa-file-text-o"></i> <span class="menu-item-parent">Documents</span></a>
     </li>
 
   </ul>

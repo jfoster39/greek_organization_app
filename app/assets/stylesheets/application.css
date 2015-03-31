@@ -25,3 +25,8 @@ body {
 form .alert {
   margin-bottom: 0px;
 }
+
+.dropdown-menu {
+  top: inherit;
+  color: black;
+}
