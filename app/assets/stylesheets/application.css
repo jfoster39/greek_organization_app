@@ -30,3 +30,8 @@ form .alert {
   top: inherit;
   color: black;
 }
+
+#ribbon .breadcrumb {
+  padding: 5px 0 0 0 !important;
+  font-size: 20px;
+}
