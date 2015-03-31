@@ -14,6 +14,10 @@ class OrganizationsController < ApplicationController
     end
   end
 
+  def users
+    @users = current_organization.users
+  end
+
   private
 
   def organization_form_params

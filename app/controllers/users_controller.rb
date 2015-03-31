@@ -4,14 +4,6 @@ class UsersController < ApplicationController
   def dashboard
   end
 
-  def index
-    @users = User.all
-  end
-
-  def users
-    @users = User.all
-  end
-
   def new
     @organizations = Organization.all
     @user_form = UserForm.new
