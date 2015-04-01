@@ -14,4 +14,8 @@ class User < ActiveRecord::Base
     role == "admin"
   end
 
+  def has_authorization_over(user)
+    self == user || (self.role == "admin" && self.organization == user.organization)
+  end
+
 end
