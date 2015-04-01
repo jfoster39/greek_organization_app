@@ -15,7 +15,8 @@ class OrganizationsController < ApplicationController
   end
 
   def users
-    @users = current_organization.users
+    @users = current_organization.users.where.not(role: "pending")
+    @pending_users = current_organization.pending_users
   end
 
   private

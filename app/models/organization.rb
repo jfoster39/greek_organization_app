@@ -14,4 +14,8 @@ class Organization < ActiveRecord::Base
     !users.where(role: "pending").blank?
   end
 
+  def pending_users
+    users.where(role: "pending")
+  end
+
 end
