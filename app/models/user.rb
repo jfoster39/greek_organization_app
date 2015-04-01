@@ -12,8 +12,16 @@ class User < ActiveRecord::Base
   validates :last_name, presence: true
   validates :phone_number, presence: true
 
+  def full_name
+    first_name + " " + last_name
+  end
+
   def is_admin?
     role == "admin"
+  end
+
+  def is_admin_of(org)
+    role == "admin" && self.organization == org
   end
 
   def has_authorization_over(user)
