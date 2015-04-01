@@ -3,13 +3,6 @@
     <h1 class="page-title txt-color-blueDark">
       <i class="fa fa-fw fa-group"></i>
       Users
-      <!--- create button div -->
-      <% if current_user.is_admin? %>
-        <%= link_to "Add User", new_user_path, 
-          {:style=> 'float:right', 
-           :class=>'btn btn-success'} 
-         %>
-     <% end %>
    </h1>
  </div>
 </div>
