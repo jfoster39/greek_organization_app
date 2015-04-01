@@ -23,7 +23,7 @@ Rails.application.routes.draw do
   delete "/users/:id" => "users#destroy", as: "destroy_user"
   get "/users/:id/approve" => "users#approve", as: :approve_user
 
-  get "/calendar" => "users#calendar"
+  get "/calendar" => "organizations#calendar"
   get "/documents" => "users#documents"
 
   get "/organizations/new" => "organizations#new", as: "new_organization"

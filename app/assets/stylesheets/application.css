@@ -73,3 +73,11 @@ form .alert {
 .checkbox label {
   padding-left: 0px;
 }
+
+#calendar img {
+  width: 100%;
+}
+
+.jarviswidget #calendar {
+  margin-top: 0px;
+}
