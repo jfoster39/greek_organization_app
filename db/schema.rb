@@ -11,15 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150401041239) do
+ActiveRecord::Schema.define(version: 20150401052558) do
 
   create_table "announcements", force: true do |t|
     t.integer  "user_id"
     t.integer  "organization_id"
     t.string   "title"
-    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "plaintext_body"
+    t.text     "html_body"
   end
 
   create_table "financial_providers", force: true do |t|
