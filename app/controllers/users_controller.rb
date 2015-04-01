@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_filter :authenticate_user!, except: [:new, :create]
+  skip_before_filter :authenticate_user, only: [:new, :create]
   before_filter :ensure_authorized, only: [:edit, :update, :destroy]
 
   def dashboard
