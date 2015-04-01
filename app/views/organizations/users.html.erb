@@ -78,7 +78,7 @@
         <tbody>
           <% @users.each do |user| %>
             <tr>
-              <td><%= user.created_at.strftime("%m/%e/%Y")%></td>
+              <td><%= user.created_at.strftime("%m/%d/%Y")%></td>
               <td><%= user.first_name.to_s + ' ' + user.last_name.to_s %></td>
               <td><%= user.email %></td>
               <td><%= user.phone_number %></td>
