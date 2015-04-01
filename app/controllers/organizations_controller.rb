@@ -19,6 +19,10 @@ class OrganizationsController < ApplicationController
     @pending_users = current_organization.pending_users
   end
 
+  def announcements
+    @announcements = current_organization.announcements.order('created_at DESC')
+  end
+
   private
 
   def organization_form_params
