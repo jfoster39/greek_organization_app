@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   root 'users#dashboard'
   get "/dashboard" => "users#dashboard"
   get "/users" => "organizations#users", as: "organization_users"
+  get "/announcements" => "organizations#announcements", as: "organization_announcements"
+
+  #announcement resources
+  patch "/announcements/:id" => "announcements#update"
+  get "/announcements/new" => "announcements#new", as: "new_announcement"
+  get "/announcements/:id/edit" => "announcements#edit", as: "edit_announcement"
+  delete "/announcements/:id" => "announcements#destroy", as: "destroy_announcement"
 
   #user resources
   patch "/users/:id" => "users#update"
