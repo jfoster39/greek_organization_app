@@ -29,6 +29,12 @@ class UsersController < ApplicationController
     respond_with(@user)
   end
 
+  def approve
+    @user = User.find(params[:id])
+    @user.update(role: "member")
+    redirect_to organization_users_path
+  end
+
   private
 
   def user_form_params

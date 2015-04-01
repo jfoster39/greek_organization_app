@@ -5,13 +5,14 @@ Rails.application.routes.draw do
   end
   root 'users#dashboard'
   get "/dashboard" => "users#dashboard"
-  get "/users" => "organizations#users"
+  get "/users" => "organizations#users", as: "organization_users"
 
   #user resources
   put "/users/:id" => "users#update"
   get "/users/new" => "users#new", as: "new_user"
   get "/users/edit" => "users#edit", as: "edit_user"
   delete "/user" => "users#delete"
+  get "/users/:id/approve" => "users#approve", as: :approve_user
 
   get "/calendar" => "users#calendar"
   get "/documents" => "users#documents"
