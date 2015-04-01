@@ -19,4 +19,8 @@ class Organization < ActiveRecord::Base
     users.where(role: "pending")
   end
 
+  def recent_announcements(limit=5)
+    announcements.limit(limit)
+  end
+
 end
