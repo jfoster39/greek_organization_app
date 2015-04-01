@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="well no-padding">
+
+      <%= form_for(@announcement, url: "/announcements", html: {class: "smart-form client-form"}) do |f| %>
+        <header>Create Announcement</header>
+
+        <% if !@announcement.errors.empty? %>
+          <p class="alert alert-danger">
+            <% @announcement.errors.full_messages.each do |message| %>
+              <%= message %><br />
+            <% end %>
+          </p>
+        <% end %>
+
+        <fieldset>
+
+          <section>
+            <label class="label"><%= f.label :title %></label>
+            <label class="input"><%= f.text_field :title, autofocus: true %></label>
+          </section>
+
+          <section>
+            <label class="label"><%= f.label :body %></label>
+            <label class="input"><div id="announcement_body_area"></div></label>
+            <%= f.text_area :plaintext_body, hidden: true%>
+            <%= f.text_area :html_body, hidden: true%>
+          </section>
+
+        </fieldset>
+
+        <footer>
+          <div><%= f.submit "Post", class: "btn btn-primary" %></div>
+        </footer>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    var summernote = $('#announcement_body_area').summernote();
+    $("#new_announcement").submit(function() {
+      $("#announcement_plaintext_body").val($(".note-editable").text());
+      $("#announcement_html_body").val(summernote.code());
+    });
+  });
+
+</script>

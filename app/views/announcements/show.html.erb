@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <h1 class="page-title txt-color-blueDark">
+      <i class="fa fa-fw fa-bullhorn"></i>
+      Announcement
+    </h1>
+    <div class="jarviswidget">
+      <header><h2><%= @announcement.title %></h2></header>
+      <div class="content">
+        <div class="widget-body">
+      <p><%=@announcement.created_at.strftime("%m/%d/%Y")%> - <%=@announcement.user.full_name%></p>
+          <%= raw @announcement.html_body %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
