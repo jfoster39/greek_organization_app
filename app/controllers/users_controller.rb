@@ -49,12 +49,36 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    if params[:user][:password].blank?
+    if params[:user][:is_admin].to_i == 1
+      params[:user][:role] = "admin"
+    else
+      params[:user][:role] = "member"
+    end
+    params[:user].delete :is_admin
+    if params[:user][:password].blank? && current_user.is_admin?
+      params.require(:user).permit(
+        :email,
+        :phone_number,
+        :first_name,
+        :last_name,
+        :role
+      )
+    elsif params[:user][:password].blank?
       params.require(:user).permit(
         :email,
         :phone_number,
         :first_name,
         :last_name
+      )
+    elsif current_user.is_admin?
+      params.require(:user).permit(
+        :email,
+        :phone_number,
+        :first_name,
+        :last_name,
+        :password,
+        :password_confirmation,
+        :role
       )
     else
       params.require(:user).permit(
@@ -82,7 +106,7 @@ class UsersController < ApplicationController
 
   def ensure_authorized
     @user = User.find(params[:id])
-    unless current_user.has_authorization_over(@user)
+    unless current_user && current_user.has_authorization_over(@user)
       redirect_to user_dashboard_path, alert: "You do not have authorization to perform this action."
     end
   end

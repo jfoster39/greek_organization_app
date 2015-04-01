@@ -59,3 +59,17 @@ form .alert {
 .note-editor:hover {
   border-color: #5D98CC;
 }
+
+.smart-form .checkbox input, .smart-form .radio input {
+  position: relative;
+  left: inherit;
+  margin-left: 0px;
+}
+
+.smart-form .checkbox {
+  padding-left: 0px;
+}
+
+.checkbox label {
+  padding-left: 0px;
+}
