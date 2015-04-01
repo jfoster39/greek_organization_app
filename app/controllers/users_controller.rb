@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   before_filter :ensure_authorized, only: [:edit, :update, :destroy]
 
   def dashboard
+    @announcements = current_user.organization.recent_announcements
   end
 
   def new
