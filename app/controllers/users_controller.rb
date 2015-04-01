@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_filter :authenticate_user!, except: [:new, :create]
+  before_filter :ensure_authorized, only: [:edit, :update, :destroy]
 
   def dashboard
   end
@@ -19,14 +20,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
   def update
+    @user = User.find(params[:id])
     @user.update(user_params)
-    respond_with(@user)
+    redirect_to edit_user_path
   end
 
   def destroy
+    @user = User.find(params[:id])
     @user.destroy
-    respond_with(@user)
   end
 
   def approve
@@ -36,6 +42,16 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def user_params
+    params.require(:user).permit(
+      :email,
+      :password,
+      :phone_number,
+      :first_name,
+      :last_name
+   )
+  end
 
   def user_form_params
     params.require(:user_form).permit(
@@ -47,6 +63,13 @@ class UsersController < ApplicationController
       :first_name,
       :last_name
     )
+  end
+
+  def ensure_authorized
+    @user = User.find(params[:id])
+    unless current_user.has_authorization_over(@user)
+      redirect_to user_dashboard_path, alert: "You do not have authorization to perform this action."
+    end
   end
 
 end
