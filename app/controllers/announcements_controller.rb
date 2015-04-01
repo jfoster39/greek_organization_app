@@ -54,18 +54,14 @@ class AnnouncementsController < ApplicationController
 
   def ensure_admin_of_org
     @announcement = Announcement.find(params[:id])
-    if current_user
-      if !current_user.is_admin_of(@announcement.organization)
-        redirect_to user_dashboard_path, alert: "You do not have permission to perform this action."
-      end
+    unless current_user && current_user.is_admin_of(@announcement.organization)
+      redirect_to user_dashboard_path, alert: "You do not have permission to perform this action."
     end
   end
 
   def ensure_admin
-    if current_user
-      if !current_user.is_admin?
-        redirect_to user_dashboard_path, alert: "You do not have permission to perform this action."
-      end
+    unless current_user && current_user.is_admin?
+      redirect_to user_dashboard_path, alert: "You do not have permission to perform this action."
     end
   end
 
