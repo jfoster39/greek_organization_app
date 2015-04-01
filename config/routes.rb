@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   #user resources
   put "/users/:id" => "users#update"
   get "/users/new" => "users#new", as: "new_user"
-  get "/users/edit" => "users#edit", as: "edit_user"
+  get "/users/:id/edit" => "users#edit", as: "edit_user"
   delete "/user" => "users#delete"
   get "/users/:id/approve" => "users#approve", as: :approve_user
 
