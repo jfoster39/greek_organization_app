@@ -1,29 +1,16 @@
 <div class="row">
   <div class="col-xs-12">
     <h1 class="page-title txt-color-blueDark">
-      <i class="fa fa-fw fa-bullhorn"></i>
-      Announcements
-      <!--- create button div -->
-      <% if current_user.is_admin? %>
-        <%= link_to "Create Announcement", new_announcement_path, 
-          {:style=> 'float:right', 
-           :class=>'btn btn-success'} 
-         %>
-     <% end %>
+      <i class="fa fa-fw fa-file-text-o"></i>
+      Documents
    </h1>
  </div>
 </div>
 
-<% if notice%>
-  <p class="alert alert-info"><%= notice %></p>
-<% elsif alert %>
-  <p class="alert alert-danger"><%= alert %></p>
-<% end %>
-
 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
   <header>
     <span class="widget-icon"> <i class="fa fa-table"></i> </span>
-    <h2>Announcements</h2>
+    <h2>Documents</h2>
   </header>
 
   <div>
@@ -31,24 +18,23 @@
       <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
         <thead>
           <tr>
-            <th>Date</th>
-            <th data-class="expand">Title</th>
-            <th>Body</th>
-            <th data-hide="phone,tablet">Actions</th>
+            <th>Type</th>
+            <th>Last Updated</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          <% @announcements.each do |announcement| %>
+          <% @documents.each do |document| %>
             <tr>
-              <td><%= announcement.created_at.strftime("%m/%d/%Y")%></td>
-              <td><%= announcement.title %></td>
-              <td><%= truncate(announcement.plaintext_body, length: 50)%></td>
+              <td><%= raw document.type %></td>
+              <td><%= document.updated_at.strftime("%m/%d/%Y")%></td>
+              <td><%= document.name%></td>
+              <td><%= document.size%></td>
               <td>
-                <%= link_to "View", announcement_path(announcement), :class => "btn btn-info" %>
-                <% if current_user.is_admin? %>
-                  <%= link_to "Edit", edit_announcement_path(announcement), :class => "btn btn-warning" %>
-                  <%= link_to "Delete", destroy_announcement_path(announcement), method: :delete, data: { confirm: "Are you sure?" }, :class => "btn btn-danger" %>
-                <% end %>
+                <a href="#" class="btn btn-info">View</a>
+                <a href="#" class="btn btn-danger">Delete</a>
               </td>
             </tr>
           <% end %>
@@ -57,12 +43,10 @@
     </div>
   </div>
 </div>
-
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.css">
-
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.4/js/jquery.dataTables.js"></script>
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/responsive/1.0.3/js/dataTables.responsive.min.js"></script>
   <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/plug-ins/3cfcc339e89/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+
 <script type="text/javascript">
 
 			var breakpointDefinition = {

@@ -28,4 +28,43 @@ class User < ActiveRecord::Base
     self == user || (self.role == "admin" && self.organization == user.organization)
   end
 
+  def documents
+    [
+      Document.new(
+        "<i class='fa fa-question-circle'></i> Form",
+        Date.yesterday,
+        "Date Night Signup",
+        "10kb"
+      ),
+      Document.new(
+        "<i class='fa fa-folder'></i> Folder",
+        Date.yesterday - 30,
+        "Word",
+        "0kb"
+      ),
+      Document.new(
+        "<i class='fa fa-file-text '></i> Document",
+        Date.yesterday - 2,
+        "Exec 3.30.2015 Minutes",
+        "42kb"
+      ),
+      Document.new(
+        "<i class='fa fa-question-circle'></i> Form",
+        Date.yesterday - 4,
+        "Tug Signup",
+        "8kb"
+      ),
+      Document.new(
+        "<i class='fa fa-question-circle'></i> Form",
+        Date.yesterday - 30,
+        "Formal Signup",
+        "16kb"
+      )
+    ]
+  end
+
+  class Document < Struct.new(:type, :updated_at, :name, :size)
+
+  end
+
 end

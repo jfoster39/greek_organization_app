@@ -46,6 +46,10 @@ class UsersController < ApplicationController
     redirect_to organization_users_path
   end
 
+  def documents
+    @documents = current_user.documents
+  end
+
   private
 
   def user_params
