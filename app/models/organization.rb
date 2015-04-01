@@ -3,6 +3,7 @@ class Organization < ActiveRecord::Base
   belongs_to :financial_provider
 
   has_many :users
+  has_many :announcements
 
   validates :name, presence: true
 
