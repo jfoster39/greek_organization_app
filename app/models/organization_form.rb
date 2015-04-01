@@ -45,8 +45,9 @@ class OrganizationForm
       input = "http://#{input}"
     end
     if input[-1, 1] == "/"
-      input.chomp("/")
+      input = input.chomp("/")
     end
+    input
   end
 
 end
