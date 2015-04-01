@@ -31,6 +31,8 @@ class OrganizationsController < ApplicationController
       :password,
       :password_confirmation,
       :organization_name,
+      :financial_provider_name,
+      :financial_provider_url,
       :phone_number,
       :first_name,
       :last_name
