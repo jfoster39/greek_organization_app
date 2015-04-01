@@ -39,7 +39,7 @@
 
     <% if current_user && current_user.organization.has_financial_provider? %>
       <li>
-      <a href=<%= current_user.organization.financial_provider.external_url %>><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Finances</span></a>
+      <a href="<%= current_user.organization.financial_provider.external_url %>"><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Finances</span></a>
       </li>
     <% else %>
 
