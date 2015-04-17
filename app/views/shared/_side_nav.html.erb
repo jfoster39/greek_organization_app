@@ -5,12 +5,12 @@
       <% if current_user %>
         <a href="#" data-toggle="dropdown">
           <span>
-            <%= current_user.email %>
+            <%= current_user.full_name %>
           </span>
           <i class="fa fa-angle-down"></i>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <li><a href="logout">Logout</a></li>
+          <li><a href="/logout">Logout</a></li>
         </ul>
       <% else %>
         <a href="<%= new_user_session_path %>">
@@ -37,7 +37,7 @@
     <a href="/calendar"><i class="fa fa-lg fa-fw fa-calendar"></i> <span class="menu-item-parent">Calendar</span></a>
     </li>
 
-    <% if current_user && current_user.organization.has_financial_provider? %>
+    <% if current_user && current_user.organization && current_user.organization.has_financial_provider? %>
       <li>
       <a href="<%= current_user.organization.financial_provider.external_url %>"><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Finances</span></a>
       </li>
