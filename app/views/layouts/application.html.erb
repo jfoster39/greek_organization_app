@@ -19,7 +19,7 @@
   <div id="main" role="main">
     <div id="ribbon">
       <ol class="breadcrumb">
-        <% if current_user %>
+        <% if current_user && current_user.organization %>
           <%= current_user.organization.name %>
         <% end %>
       </ol>

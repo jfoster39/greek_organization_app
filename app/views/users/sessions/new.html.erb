@@ -13,6 +13,8 @@
         <% end %>
 
         <fieldset>
+          <%= link_to "", user_omniauth_authorize_path(:google_oauth2), class: "btn btn-google" %>
+          <p class="split">or</p>
           <section>
             <label class="label"><%= f.label :email %></label>
             <label class="input"><%= f.email_field :email, autofocus: true %></label>
@@ -21,13 +23,9 @@
             <label class="label"><%= f.label :password %> <% if @validatable %><i>(<%= @minimum_password_length %> characters minimum)</i><% end %></label>
             <label class="input"><%= f.password_field :password, autocomplete: "off" %></label>
           </section>
-        </fieldset>
 
-        <footer>
-        <div>
         <%= link_to "Forgot Password", new_user_password_path %>
-        <%= f.submit "Log in", class: "btn btn-primary" %></div>
-        </footer>
+        <%= f.submit "Log in", class: "btn btn-primary" %>
       <% end %>
     </div>
 

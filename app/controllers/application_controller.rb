@@ -6,9 +6,11 @@ class ApplicationController < ActionController::Base
 
   def authenticate_user
     if current_user
-      if current_user.role == "pending"
+      if current_user.organization.nil?
+        redirect_to edit_user_organization_path
+      elsif current_user.role == "pending"
         sign_out(current_user)
-        redirect_to new_user_session_path, alert: "Your account must be confirmed by an admin of the organization before you can sign in."
+        redirect_to new_user_session_path, notice: "Your account must be confirmed by an admin of the organization before you can sign in."
       end
     else
       redirect_to new_user_session_path, alert: "You must be signed in to access this page."

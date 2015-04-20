@@ -1,6 +1,23 @@
 class UsersController < ApplicationController
-  skip_before_filter :authenticate_user, only: [:new, :create]
+  skip_before_filter :authenticate_user, only: [:new, :create, :edit_organization, :update_organization]
   before_filter :ensure_authorized, only: [:edit, :update, :destroy]
+
+  def edit_organization
+    @join_organization_form = UserJoinOrganizationForm.new(user_id: current_user.id)
+    @create_organization_form = UserCreateOrganizationForm.new(user_id: current_user.id)
+    @organizations = Organization.all
+  end
+
+  def update_organization
+    @join_organization_form = UserJoinOrganizationForm.new(join_org_params)
+    @organizations = Organization.all
+    @create_organization_form = UserCreateOrganizationForm.new(user_id: current_user.id)
+    if @join_organization_form.submit
+      redirect_to new_user_session_path, notice: "Thank you. Your account must be confirmed by an admin of the organization before you can sign in."
+    else
+      render 'edit_organization'
+    end
+  end
 
   def dashboard
     @announcements = current_user.organization.recent_announcements
@@ -38,6 +55,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
+    redirect_to organization_users_path, notice: "User successfully deleted"
   end
 
   def approve
@@ -106,6 +124,12 @@ class UsersController < ApplicationController
       :first_name,
       :last_name
     )
+  end
+
+  def join_org_params
+    params.require(:user_join_organization_form).permit(
+      :id
+    ).merge(user_id: current_user.id)
   end
 
   def ensure_authorized

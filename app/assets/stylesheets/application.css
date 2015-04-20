@@ -81,3 +81,38 @@ form .alert {
 .jarviswidget #calendar {
   margin-top: 0px;
 }
+
+.btn.btn-google {
+  background-image: url(Red-signin_Long_base_44dp.png);
+  background-size:   cover;
+  width: 180px;
+  height: 40px;
+  padding: 0px;
+  border: 0px;
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  margin: 0 auto;
+  display: block;
+}
+
+form#new_user p.split {
+  text-align: center;
+  margin: 15px 0;
+}
+
+.btn.btn-google:hover {
+  background-image: url(Red-signin_Long_press_44dp.png);
+}
+
+form#new_user fieldset input.btn {
+    float: right;
+    height: 31px;
+    margin: 10px 0 0 5px;
+    padding: 0 22px;
+    font: 300 15px/29px 'Open Sans',Helvetica,Arial,sans-serif;
+    cursor: pointer;
+}
+
+form#new_user fieldset {
+  margin-bottom: 20px;
+}

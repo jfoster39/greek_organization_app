@@ -8,6 +8,8 @@ group :development do
   gem 'sqlite3'
 end
 
+gem "omniauth-google-oauth2"
+
 group :production do
   gem 'pg'
   gem 'rails_12factor'
