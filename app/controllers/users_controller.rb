@@ -1,11 +1,22 @@
 class UsersController < ApplicationController
-  skip_before_filter :authenticate_user, only: [:new, :create, :edit_organization, :update_organization]
+  skip_before_filter :authenticate_user, only: [:new, :create, :edit_organization, :update_organization, :create_organization]
   before_filter :ensure_authorized, only: [:edit, :update, :destroy]
 
   def edit_organization
     @join_organization_form = UserJoinOrganizationForm.new(user_id: current_user.id)
     @create_organization_form = UserCreateOrganizationForm.new(user_id: current_user.id)
     @organizations = Organization.all
+  end
+
+  def create_organization
+    @join_organization_form = UserJoinOrganizationForm.new(user_id: current_user.id)
+    @organizations = Organization.all
+    @create_organization_form = UserCreateOrganizationForm.new(create_org_params)
+    if @create_organization_form.submit
+      redirect_to root_path, notice: "Thank you for creating your organization."
+    else
+      render 'edit_organization'
+    end
   end
 
   def update_organization
@@ -129,6 +140,14 @@ class UsersController < ApplicationController
   def join_org_params
     params.require(:user_join_organization_form).permit(
       :id
+    ).merge(user_id: current_user.id)
+  end
+
+  def create_org_params
+    params.require(:user_create_organization_form).permit(
+      :name,
+      :financial_provider_name,
+      :financial_provider_url
     ).merge(user_id: current_user.id)
   end
 

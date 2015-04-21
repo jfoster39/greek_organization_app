@@ -35,9 +35,19 @@
   <div class="row">
   <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
     <div class="well no-padding">
-      <%= form_for(@create_organization_form, url: "/organizations", html: {class: "smart-form client-form"}) do |f| %>
+      <%= form_for(@create_organization_form, url: "/users/organization", html: {class: "smart-form client-form"}) do |f| %>
 
         <header>Create Organization</header>
+
+        <% if !@create_organization_form.organization.nil? %>
+          <% if !@create_organization_form.organization.errors.empty? %>
+            <p class="alert alert-danger">
+              <% @create_organization_form.organization.errors.full_messages.each do |message| %>
+                <%= message %><br />
+              <% end %>
+            </p>
+          <% end %>
+        <% end %>
 
         <fieldset>
 

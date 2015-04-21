@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   delete "/users/:id" => "users#destroy", as: "destroy_user"
   get "/users/:id/approve" => "users#approve", as: :approve_user
   get "/users/organization" => "users#edit_organization", as: "edit_user_organization"
+  post "/users/organization" => "users#create_organization", as: "create_user_organization"
   patch "/users_organization" => "users#update_organization"
   get "/documents" => "users#documents"
   get "/oauth2callback" => "users#new_google"
