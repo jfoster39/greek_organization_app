@@ -11,7 +11,7 @@ class OrganizationForm
   end
 
   def submit
-    @financial_provider = FinancialProvider.where(name: @financial_provider_name, external_url: url(@financial_provider_url)).first_or_create
+    @financial_provider = FinancialProvider.where(name: @financial_provider_name, external_url: @financial_provider_url).first_or_create
     @organization = Organization.new(name: @organization_name, financial_provider: @financial_provider)
     @user = User.new(
       first_name: @first_name,
@@ -36,18 +36,6 @@ class OrganizationForm
       end
     end
     return errors.empty?
-  end
-
-  private
-
-  def url(input)
-    if input[0,4] != "http"
-      input = "http://#{input}"
-    end
-    if input[-1, 1] == "/"
-      input = input.chomp("/")
-    end
-    input
   end
 
 end
