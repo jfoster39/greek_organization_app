@@ -32,6 +32,7 @@ class UsersController < ApplicationController
 
   def dashboard
     @announcements = current_user.organization.recent_announcements
+    @calendar = current_organization.calendar
   end
 
   def new
@@ -147,7 +148,8 @@ class UsersController < ApplicationController
     params.require(:user_create_organization_form).permit(
       :name,
       :financial_provider_name,
-      :financial_provider_url
+      :financial_provider_url,
+      :calendar_url
     ).merge(user_id: current_user.id)
   end
 

@@ -1,6 +1,10 @@
 class OrganizationsController < ApplicationController
   skip_before_filter :authenticate_user, only: [:new, :create]
 
+  def calendar
+    @calendar = current_organization.calendar
+  end
+
   def new
     @organization_form = OrganizationForm.new
   end
@@ -23,7 +27,7 @@ class OrganizationsController < ApplicationController
   def announcements
     @announcements = current_organization.announcements.order('created_at DESC')
   end
-  
+
   def documents
     @documents = current_organization.documents.order('created_at DESC')
   end
@@ -38,6 +42,7 @@ class OrganizationsController < ApplicationController
       :organization_name,
       :financial_provider_name,
       :financial_provider_url,
+      :calendar_url,
       :phone_number,
       :first_name,
       :last_name

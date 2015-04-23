@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423152527) do
+ActiveRecord::Schema.define(version: 20150423221949) do
 
   create_table "announcements", force: true do |t|
     t.integer  "user_id"
@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 20150423152527) do
     t.datetime "updated_at"
     t.text     "plaintext_body"
     t.text     "html_body"
+  end
+
+  create_table "calendars", force: true do |t|
+    t.string   "embed_url"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "documents", force: true do |t|

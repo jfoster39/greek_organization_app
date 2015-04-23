@@ -1,7 +1,7 @@
 class UserCreateOrganizationForm
   include ActiveModel::Model
 
-  attr_accessor :user_id, :name, :financial_provider_name, :financial_provider_url, :organization
+  attr_accessor :user_id, :name, :financial_provider_name, :financial_provider_url, :organization, :calendar_url
 
   def initialize(args={})
     args.each do |k,v|
@@ -19,12 +19,26 @@ class UserCreateOrganizationForm
       name: name,
       financial_provider: @financial_provider,
     )
-    if @organization.save
+    @calendar = Calendar.new(
+      embed_url: calendar_url,
+      organization: @organization
+    )
+    ActiveRecord::Base.transaction do
+      if !@organization.save
+        @organization.errors.full_messages.each do |msg|
+          errors.add(:organization, msg)
+        end
+        return false
+      end
+      if !@calendar.save
+        @calendar.errors.full_messages.each do |msg|
+          errors.add(:organization, msg)
+        end
+        return false
+      end
       @user.organization = @organization
       @user.role = "admin"
       return @user.save
-    else
-      return false
     end
   end
 

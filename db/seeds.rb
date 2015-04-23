@@ -144,3 +144,8 @@ Announcement.create(
   "<p>Thanks,</p>" +
   "<p>Kenta Yasuda -2036-</p>"
 )
+
+Calendar.create(
+  embed_url: "https://www.google.com/calendar/embed?src=noland.smith%40gtbeta.org&ctz=America/New_York",
+  organization: beta
+)
