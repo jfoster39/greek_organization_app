@@ -23,6 +23,10 @@ class OrganizationsController < ApplicationController
   def announcements
     @announcements = current_organization.announcements.order('created_at DESC')
   end
+  
+  def documents
+    @documents = current_organization.documents.order('created_at DESC')
+  end
 
   private
 
