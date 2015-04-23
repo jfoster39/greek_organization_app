@@ -4,6 +4,7 @@ class Organization < ActiveRecord::Base
 
   has_many :users
   has_many :announcements
+  has_many :documents
 
   validates :name, presence: true
 
@@ -21,6 +22,10 @@ class Organization < ActiveRecord::Base
 
   def recent_announcements(limit=5)
     announcements.limit(limit)
+  end
+  
+  def recent_documents(limit=5)
+      documents.limit(limit)
   end
 
 end

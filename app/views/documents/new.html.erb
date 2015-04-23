@@ -1,0 +1,48 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="well no-padding">
+
+      <%= form_for(@document, url: "/documents", html: {class: "smart-form client-form"}) do |f| %>
+        <header>Create Document</header>
+
+        <% if !@document.errors.empty? %>
+          <p class="alert alert-danger">
+            <% @document.errors.full_messages.each do |message| %>
+              <%= message %><br />
+            <% end %>
+          </p>
+        <% end %>
+
+        <fieldset>
+
+          <section>
+            <label class="label"><%= f.label :title %></label>
+            <label class="input"><%= f.text_field :title, autofocus: true %></label>
+          </section>
+
+         <section>
+            <label class="label"><%= f.label :link %></label>
+            <label class="input"><%= f.text_field :link, autofocus: true %></label>
+          </section>
+
+        </fieldset>
+
+        <footer>
+          <div><%= f.submit "Post", class: "btn btn-primary" %></div>
+        </footer>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    var summernote = $('#document_body_area').summernote();
+    $("#new_document").submit(function() {
+      $("#document_plaintext_body").val($(".note-editable").text());
+      $("#document_html_body").val(summernote.code());
+    });
+  });
+
+</script>

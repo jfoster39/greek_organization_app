@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <div class="well no-padding">
+
+      <%= form_for(@ document, url: "/documents/#{@document.id}", html: {class: "smart-form client-form"}) do |f| %>
+        <header>Edit Document</header>
+
+        <% if alert %>
+          <div class="alert alert-danger">
+            <%= alert %>
+          </div>
+        <% elsif notice %>
+          <div class="alert alert-success">
+            <%= notice %>
+          </div>
+        <% elsif !@document.errors.empty? %>
+          <p class="alert alert-danger">
+            <% @document.errors.full_messages.each do |message| %>
+              <%= message %><br />
+            <% end %>
+          </p>
+        <% end %>
+
+        <fieldset>
+
+          <section>
+            <label class="label"><%= f.label :title %></label>
+            <label class="input"><%= f.text_field :title, autofocus: true %></label>
+          </section>
+
+          <section>
+            <label class="label"><%= f.label :body %></label>
+            <label class="input"><div id="document_body_area"></div></label>
+            <%= f.text_area :plaintext_body, hidden: true%>
+            <%= f.text_area :html_body, hidden: true%>
+          </section>
+
+        </fieldset>
+
+        <footer>
+          <div><%= f.submit "Update", class: "btn btn-primary" %></div>
+        </footer>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+    var summernote = $('#document_body_area').summernote({
+      });
+    $(".note-editable").html('<%= raw @document.html_body %>');
+
+    $("#edit_document_<%=@document.id%>").submit(function() {
+      $("#document_plaintext_body").val($(".note-editable").text());
+      $("#document_html_body").val(summernote.code());
+    });
+  });
+
+</script>
